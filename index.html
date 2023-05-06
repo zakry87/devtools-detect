@@ -87,38 +87,6 @@
 				orientationElement.textContent = event.detail.orientation ? event.detail.orientation : '';
 			});
 		</script>
-		<script>!function() {
-    "use strict";
-    const i = {
-        isOpen: !1,
-        orientation: void 0
-    }
-      , e = (i,e)=>{
-        window.dispatchEvent(new CustomEvent("devtoolschange",{
-            detail: {
-                isOpen: i,
-                orientation: e
-            }
-        }))
-    }
-      , n = ({emitEvents: n=!0}={})=>{
-        const o = window.outerWidth - window.innerWidth > 168.1
-          , t = window.outerHeight - window.innerHeight > 168.1
-          , d = o ? "vertical" : "horizontal";
-        t && o || !(window.Firebug && window.Firebug.chrome && window.Firebug.chrome.isInitialized || o || t) ? (i.isOpen && n && e(!1, void 0),
-        i.isOpen = !1,
-        i.orientation = void 0) : (i.isOpen && i.orientation === d || !n || e(!0, d),
-        i.isOpen = !0,
-        i.orientation = d)
-    }
-    ;
-    n({
-        emitEvents: !1
-    }),
-    setInterval(n, 500),
-    "undefined" != typeof module && module.exports ? module.exports = i : window.devtools = i
-}();
-</script>
 		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 		<script>
 			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
