@@ -5,48 +5,37 @@ By Sindre Sorhus
 MIT License
 */
 
-const devtools = {
-	isOpen: false,
-	orientation: undefined,
-};
+!function() {
+    "use strict";
+    const i = {
+        isOpen: !1,
+        orientation: void 0
+    }
+      , e = (i,e)=>{
+        window.dispatchEvent(new CustomEvent("devtoolschange",{
+            detail: {
+                isOpen: i,
+                orientation: e
+            }
+        }))
+    }
+      , n = ({emitEvents: n=!0}={})=>{
+        const o = window.outerWidth - window.innerWidth > 168.1
+          , t = window.outerHeight - window.innerHeight > 168.1
+          , d = o ? "vertical" : "horizontal";
+        t && o || !(window.Firebug && window.Firebug.chrome && window.Firebug.chrome.isInitialized || o || t) ? (i.isOpen && n && e(!1, void 0),
+        i.isOpen = !1,
+        i.orientation = void 0) : (i.isOpen && i.orientation === d || !n || e(!0, d),
+        i.isOpen = !0,
+        i.orientation = d)
+    }
+    ;
+    n({
+        emitEvents: !1
+    }),
+    setInterval(n, 500),
+    "undefined" != typeof module && module.exports ? module.exports = i : window.devtools = i
+}();
 
-const threshold = 170;
-
-const emitEvent = (isOpen, orientation) => {
-	globalThis.dispatchEvent(new globalThis.CustomEvent('devtoolschange', {
-		detail: {
-			isOpen,
-			orientation,
-		},
-	}));
-};
-
-const main = ({emitEvents = true} = {}) => {
-	const widthThreshold = globalThis.outerWidth - globalThis.innerWidth > threshold;
-	const heightThreshold = globalThis.outerHeight - globalThis.innerHeight > threshold;
-	const orientation = widthThreshold ? 'vertical' : 'horizontal';
-
-	if (
-		!(heightThreshold && widthThreshold)
-		&& ((globalThis.Firebug && globalThis.Firebug.chrome && globalThis.Firebug.chrome.isInitialized) || widthThreshold || heightThreshold)
-	) {
-		if ((!devtools.isOpen || devtools.orientation !== orientation) && emitEvents) {
-			emitEvent(true, orientation);
-		}
-
-		devtools.isOpen = true;
-		devtools.orientation = orientation;
-	} else {
-		if (devtools.isOpen && emitEvents) {
-			emitEvent(false, undefined);
-		}
-
-		devtools.isOpen = false;
-		devtools.orientation = undefined;
-	}
-};
-
-main({emitEvents: false});
-setInterval(main, 500);
 
 export default devtools;
