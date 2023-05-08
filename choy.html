@@ -1,0 +1,22 @@
+<!DOCTYPE html> 
+<html>
+  <head>
+    <title>Disable Context Menu</title>
+    <script type="text/jscript">
+      function disableContextMenu()
+      {
+        window.frames["fraDisabled"].document.oncontextmenu = function() 
+         { 
+            alert("No way!"); 
+            return false;
+         };   
+      }  
+    </script>
+  </head>
+  <body bgcolor="#FFFFFF" onload="disableContextMenu();" oncontextmenu="return 
+   false">
+    <iframe id="fraDisabled" width="528" height="473" referrerpolicy="no-referrer" src="https://kpstube.kozow.com/PirateTV/stream/Kids/dreamwork.html"
+       onload="disableContextMenu();" onMyLoad="disableContextMenu();"> 
+     </iframe>
+  </body>
+</html>
